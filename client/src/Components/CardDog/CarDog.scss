@@ -1,0 +1,18 @@
+.card {
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: repeat(2, 1fr); 
+    gap: 15px 15px; 
+    background-color: #FFC900;
+    padding: 1.5rem;
+    height: 22rem;
+    border-radius: 1rem;
+    &:hover {
+        transition: ease-in-out .4s;
+        transform: scale(1,1.05);
+      }
+    img {
+        height: 10rem;
+    }
+
+}

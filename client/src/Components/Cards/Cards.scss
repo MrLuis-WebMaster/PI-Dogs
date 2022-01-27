@@ -1,0 +1,28 @@
+.container {  
+  display: grid;
+  grid-template-columns: repeat(4, 0.7fr);
+  grid-template-rows: 0.7fr .7fr;
+  gap: 14px 14px;
+  grid-auto-flow: row;
+
+}
+
+.pagination {
+  display: flex;
+  place-items: center;
+  place-content: center;
+  padding: 25px;
+  gap:15px;
+  font-size: 1.1rem;
+  button {
+      border-style: none;
+      padding: 3px 15px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      width: 12%;
+    &:hover{
+        cursor: pointer;
+    }
+  }
+}
+

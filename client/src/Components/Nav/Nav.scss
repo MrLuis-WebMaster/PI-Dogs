@@ -1,0 +1,42 @@
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background-color: #1A5F7A;
+
+    .title {
+        text-transform: uppercase;
+        font-size: 1.15rem;
+        color: #FFC900;
+    }
+
+    .home {
+
+        a{
+            color: #F5F5F5;
+            font-weight: bold;
+            font-size: 1.02rem;
+        }
+    }
+
+    .create-dog{
+
+        button {
+            font-weight: bold;
+            background: #3498db;
+            border-radius: 28px;
+            color: #F5F5F5;
+            font-size: 20px;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            &:hover {
+                transition: ease-in-out .2s;
+                background: #3cb0fd;
+            }
+        }
+    }
+}
