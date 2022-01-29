@@ -1,53 +1,53 @@
 import React,{useState,useEffect}from "react";
 import { useDispatch,useSelector} from "react-redux"
-import { Link } from "react-router-dom";
+import Nav from "../Nav/Nav"
 import { getTemperaments,postDog} from "../../Redux/Actions";
 import "./Form.scss"
 
 export default function Form () {
-
     const dispatch = useDispatch();
     const temperaments = useSelector( state => state.Temperaments);
-
     useEffect(()=>{
         dispatch(getTemperaments())
     },[dispatch])
-
     function validate(input) {
-        let errors = {};                             
+        let expresion = /^(?![ .]+$)[a-zA-Z .]*$/gm;
+        let errors = {};   
         if (!input.name) {                          
-            errors.name = "Name is required";        
-        } else if (!input.minHeight) {
-            errors.minHeight = "Min height is required";
+            errors.name = "Name is missing";       
+        } else if (expresion.test(input.name) === false) {
+            errors.name = "Name invalid";
+        }else if (!input.minHeight) {
+            errors.minHeight = "Min height is missing";
         } else if (input.minHeight <= 0) {
-            errors.minHeight = "Min height should be greater than zero";
+            errors.minHeight = "height cannot be negative or zero";
         } else if (!input.maxHeight) {
-            errors.maxHeight = "Max height is required";
+            errors.maxHeight = "Max height is missing";
         } else if (input.maxHeight <= 0) {
-            errors.maxHeight = "Max height should be greater than zero";
+            errors.maxHeight = "height cannot be negative or zero";
         } else if (parseInt(input.minHeight) >= parseInt(input.maxHeight)) {      
-            errors.maxHeight = "Max height must be greater than Min height";
+            errors.maxHeight = "Max height can not be less";
         } else if (!input.minWeight) {
-            errors.minWeight = "Min weight is required";
-        } else if (input.minWeight <= 0) {
-            errors.minWeight = "Min weight should be greater than zero";
-          } else if (!input.maxWeight) {
-            errors.maxWeight = "Max weight is required";
-          } else if (input.maxWeight <= 0) {
-            errors.maxWeight = "Max weight should be greater than zero";
-          } else if (parseInt(input.minWeight) >= parseInt(input.maxWeight)) {     
-            errors.maxWeight = "Max weight must be greater than Min weight";
-          }  else if (!input.minlife_span) {
-            errors.minlife_span = "Min life is required";
+            errors.minWeight = "Min weight is missing";
+        } else if (input.minWeight <= 0 ) {
+            errors.minWeight = "Weight can not be less";
+        } else if (!input.maxWeight) {
+            errors.maxWeight = "Max weight is missing";
+        } else if (input.maxWeight <= 0) {
+            errors.maxWeight = "Weight cannot be negative or zero";
+        } else if (parseInt(input.minWeight) >= parseInt(input.maxWeight)) {     
+            errors.maxWeight = "Max weight can not be less";
+        }  else if (!input.minlife_span) {
+            errors.minlife_span = "Min life is missing";
         } else if (input.minlife_span <= 0) {
-            errors.minlife_span = "Min life should be greater than zero";
-          } else if (!input.maxlife_span) {
-            errors.maxlife_span = "Max life is required";
-          } else if (input.maxlife_span <= 0) {
-            errors.maxlife_span = "Max life should be greater than zero";
-          } else if (parseInt(input.minlife_span) >= parseInt(input.maxlife_span)) {     
-            errors.maxlife_span = "Max life must be greater than Min life";
-          }
+            errors.minlife_span = "life years cannot be negative or zero";
+        } else if (!input.maxlife_span) {
+            errors.maxlife_span = "Max life is missing";
+        } else if (input.maxlife_span <= 0) {
+            errors.maxlife_span = "life years cannot be negative or zero";
+        } else if (parseInt(input.minlife_span) >= parseInt(input.maxlife_span)) {     
+            errors.maxlife_span = "Max life can not be less";
+        }
         return errors;
     };
     const [temp, setTemp] = useState([])
@@ -85,25 +85,27 @@ export default function Form () {
         setTemp(aux)
     }
     function handleSubmit(e) {
-        if (errors.name !== undefined 
-            || 
-            errors.minHeight !== undefined 
-            ||
-            errors.maxHeight !== undefined 
-            ||
-            errors.minWeight !== undefined 
-            ||
-            errors.maxWeight !== undefined 
-            ||
-            errors.minlife_span !== undefined 
-            ||
-            errors.maxlife_span !== undefined 
-        )  
-        {
+        if (    errors.name !== undefined 
+                || errors.minHeight !== undefined 
+                || errors.maxHeight !== undefined 
+                || errors.minWeight !== undefined 
+                ||errors.maxWeight !== undefined 
+                || errors.minlife_span !== undefined 
+                || errors.maxlife_span !== undefined 
+        )  {
             e.preventDefault()
-            return alert("Please complete the fields with valid data");
+            return alert("Sorry, all fields are required");
+        } else if (state.name === "" 
+            || state.minHeight === "" 
+            || state.maxHeight === "" 
+            || state.minWeight === "" 
+            ||state.maxWeight === "" 
+            || state.minlife_span === "" 
+            || state.maxlife_span === ""
+             ) {
+            e.preventDefault()
+            return alert("Sorry, all fields are required");
         } else {
-            
             const CreateDog = {
                 name: state.name,
                 height: `${state.minHeight} - ${state.maxHeight}`,
@@ -124,19 +126,12 @@ export default function Form () {
                 maxlife_span: '',
                 temperament: []
             })
-
-            return alert("Your dog was successfully created!")
-
+            return alert("Excellent, your new dog has been created successfully!!")
         }
-
-
     }
-    console.log(state.temperament)
     return (
         <div className="Flex-Form">
-            <div className="buttonBack">
-                <Link to="/home"><button>Back to home</button></Link>
-            </div>
+            <Nav/>
             <div>
                 <h2>CREATE DOG</h2>
             </div>
@@ -157,7 +152,7 @@ export default function Form () {
                     <div>
                         <label htmlFor="">Height</label>
                         <input 
-                            type="text"  
+                            type="number"  
                             name="minHeight"  
                             value={state.minHeight} 
                             placeholder="Min Height"
@@ -167,7 +162,7 @@ export default function Form () {
                             <p className="pop-up" >{errors.minHeight}</p>
                         )}
                         <input 
-                            type="text"  
+                            type="number"  
                             name="maxHeight"  
                             value={state.maxHeight}
                             placeholder="Max Height" 
@@ -180,7 +175,7 @@ export default function Form () {
                     <div>
                         <label htmlFor="">Weight</label>
                         <input 
-                            type="text"  
+                            type="number" 
                             name="minWeight"  
                             value={state.minWeight} 
                             placeholder="Min Weight" 
@@ -190,7 +185,7 @@ export default function Form () {
                             <p className="pop-up" >{errors.minWeight}</p>
                         )}
                         <input 
-                            type="text"  
+                            type="number"   
                             name="maxWeight"  
                             value={state.maxWeight} 
                             placeholder="Max Weight" 
@@ -203,20 +198,20 @@ export default function Form () {
                     <div>
                         <label htmlFor="">Life Span</label>
                         <input 
-                            type="text"  
+                            type="number"   
                             name="minlife_span"  
                             value={state.minlife_span} 
-                            placeholder="Min Life Span"
+                            placeholder="Min Life"
                             onChange={ e => handleChange(e)}
                         />
                         {errors.minlife_span && (    
                             <p className="pop-up" >{errors.minlife_span}</p>
                         )}
                         <input 
-                            type="text"  
+                            type="number"  
                             name="maxlife_span"  
                             value={state.maxlife_span} 
-                            placeholder="Max Life Span"
+                            placeholder="Max Life"
                             onChange={ e => handleChange(e)}
                         />
                         {errors.maxlife_span && (    
@@ -224,7 +219,7 @@ export default function Form () {
                         )}
                     </div>
                     <div>
-                        <select onChange={(e)=>handleSelect(e)} name="" id="">
+                        <select onChange={(e)=>handleSelect(e)}>
                             {
                                 temperaments.map( e => {
                                     return (
@@ -242,20 +237,22 @@ export default function Form () {
                     <h3>Temperaments</h3>
                     <div>
                         {
-                            temp.map( e => {
+                            temp.map( (e,i) => {
                                 return (
-                                    <div className="li-button">
-                                        <li>{e}</li>
-                                        <button name={`${e}`} onClick={(e)=>{filterTemp(e)}}>X</button>
+                                    
+                                    <div key={i}>
+                                        <div  className="li-button">
+                                            <li>{e}</li>
+                                            <button name={`${e}`} onClick={(e)=>{filterTemp(e)}}>X</button>
+                                        </div>
+                                        <div class="linea"></div>
                                     </div>
                                 )
                             })
                         }
                     </div>
                 </div>
-
             </div>
-
         </div>
 
     )

@@ -1,10 +1,9 @@
 .flex {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 1.2rem 2rem;
     background-color: #1A5F7A;
-
+    width: 100%;
     .title {
         text-transform: uppercase;
         font-size: 1.15rem;

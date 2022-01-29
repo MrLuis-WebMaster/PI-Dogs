@@ -13,7 +13,8 @@ const initialState = {
     Dogs: [],
     DetailsDog: [],
     Temperaments: [],
-    FilterDogs:[]
+    FilterDogs:[],
+    NotFound: false
 }
 
 export default function rootReducer( state = initialState, action) {
@@ -23,7 +24,6 @@ export default function rootReducer( state = initialState, action) {
             Dogs: action.payload
         }
     }
-
     if (action.type === GET_BREEDS_DETAILS) {
         return {
             ...state,
@@ -44,7 +44,8 @@ export default function rootReducer( state = initialState, action) {
             auxDogs = state.Dogs.filter(e => {
                 if (e.temperaments !== undefined) {
                     return e.temperaments.includes(action.payload);
-                } 
+                }
+                return e 
             } )
         } else {
             auxDogs=[...state.Dogs]
@@ -104,24 +105,18 @@ export default function rootReducer( state = initialState, action) {
 
         if (action.payload) {
             auxDogs = state.Dogs.filter(e => e.name.toLowerCase().includes(action.payload.toLowerCase()))
-
-        } else {
-            auxDogs=[...state.Dogs]
+        } else if(!action.payload) {
+            auxDogs = [...state.Dogs]
         }
-
         return {
             ...state,
             Dogs:auxDogs
         }
-
-
     }
-
     if(action.type === POST_DOG) {
         return {
             ...state
         }
     }
-
     return state;
 }

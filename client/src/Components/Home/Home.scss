@@ -2,6 +2,9 @@
 .Home {
     background-color: #086E7D;
     .flexFather {
-        margin: 0 20px
+        margin: 0 20px;
+        display:flex;
+        flex-direction: column;
+        place-items: center;
     }
 }

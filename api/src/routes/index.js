@@ -108,7 +108,7 @@ router.get("/temperament", async (req, res,next) => {
 
   router.post("/dog", async (req, res, next) => {
     const { name, height, weight, life_span, temperament} = req.body;  
-    if (name,height,weight,life_span,temperament) {
+    if (name && height && weight && life_span && temperament) {
         try {
             let image = "https://image.freepik.com/free-vector/cute-dog-sticking-her-tongue-out-cartoon-icon-illustration_138676-2709.jpg"  
             const newDog = await Dog.create({   
@@ -118,10 +118,10 @@ router.get("/temperament", async (req, res,next) => {
                 life_span, 
                 image
             })
-            let temperamentDb = await Temperament.findAll({  
+            let temperamentsDB = await Temperament.findAll({  
                 where: { name : temperament}   
             })
-            await newDog.addTemperament(temperamentDb)  
+            await newDog.addTemperament(temperamentsDB)  
             res.status(201).send({ info: "Dog created successfully!" })
         } catch (error) {
             next(error)

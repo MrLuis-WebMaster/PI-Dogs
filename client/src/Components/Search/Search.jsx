@@ -1,7 +1,7 @@
 import React, {useEffect}from "react";
 import { useState } from "react";
 import { useDispatch,useSelector} from "react-redux"
-import { getTemperaments,OrderByAlphabet,OrderByWeihgt, SearchByName } from "../../Redux/Actions";
+import { getBreeds, getTemperaments,OrderByAlphabet,OrderByWeihgt, SearchByName } from "../../Redux/Actions";
 import "./Search.scss"
 export default function Search ({handleOption}) {
     const dispatch = useDispatch();
@@ -23,8 +23,12 @@ export default function Search ({handleOption}) {
 
     function handleInput(e) {
         setInput(e.target.value)
-        dispatch(SearchByName(e.target.value))
-        console.log(e.target.value)
+        if (e.target.value) {
+            dispatch(SearchByName(e.target.value))
+        } 
+        if(!e.target.value) {
+            dispatch(getBreeds())
+        } 
     }
 
     return (

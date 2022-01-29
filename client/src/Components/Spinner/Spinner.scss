@@ -1,81 +1,70 @@
-.ring
-{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:150px;
-  height:150px;
-  background:transparent;
-  border:3px solid #3c3c3c;
-  border-radius:50%;
-  text-align:center;
-  line-height:150px;
-  font-family:sans-serif;
-  font-size:20px;
-  color:#fff000;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  text-shadow:0 0 10px #fff000;
-  box-shadow:0 0 20px rgba(0,0,0,.5);
+$color1: #f5f5f5;
+$color2: #f5f5f5;
+$color3: #f5f5f5;
+
+.loader {
+  width: 300px;
+  height: 300px;
 }
-.ring:before
-{
-  content:'';
-  position:absolute;
-  top:-3px;
-  left:-3px;
-  width:100%;
-  height:100%;
-  border:3px solid transparent;
-  border-top:3px solid #fff000;
-  border-right:3px solid #fff000;
-  border-radius:50%;
-  animation:animateC 2s linear infinite;
+svg {
+  width: 90%;
+  fill: none;
 }
-span
-{
-  display:block;
-  position:absolute;
-  top:calc(50% - 2px);
-  left:50%;
-  width:50%;
-  height:4px;
-  background:transparent;
-  transform-origin:left;
-  animation:animate 2s linear infinite;
-}
-span:before
-{
-  content:'';
-  position:absolute;
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background:#fff000;
-  top:-6px;
-  right:-8px;
-  box-shadow:0 0 20px #fff000;
-}
-@keyframes animateC
-{
-  0%
-  {
-    transform:rotate(0deg);
+
+.load {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 570;
+  stroke-width: 20px;
+  &.one {
+    stroke: $color3;
+    animation: load 1.5s infinite;
   }
-  100%
-  {
-    transform:rotate(360deg);
+  &.two {
+    stroke: $color2;
+    animation: load 1.5s infinite;
+    animation-delay: 0.1s;
+  }
+  &.three {
+    stroke: $color1;
+    animation: load 1.5s infinite;
+    animation-delay: 0.2s;
   }
 }
-@keyframes animate
-{
-  0%
-  {
-    transform:rotate(45deg);
+
+.point {
+  animation: bounce 1s infinite ease-in-out;
+  &.one {
+    fill: $color1;
+    animation-delay: 0s;
   }
-  100%
-  {
-    transform:rotate(405deg);
+  &.two {
+    fill: $color2;
+    animation-delay: 0.1s;
+  }
+  &.three {
+    fill: $color3;
+    animation-delay: 0.2s;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes load {
+  0% {
+    stroke-dashoffset: 570;
+  }
+  50% {
+    stroke-dashoffset: 530;
+  }
+  100% {
+    stroke-dashoffset: 570;
+    transform: rotate(360deg);
   }
 }

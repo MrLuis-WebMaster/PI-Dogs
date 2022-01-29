@@ -11,8 +11,21 @@
         transition: ease-in-out .4s;
         transform: scale(1,1.05);
       }
+    .image {
+        width: 100%;
+    }
     img {
         height: 10rem;
+    }
+
+    .info {
+        p {
+            color:#0a0a0a;
+            font-weight: bold;
+            span {
+                font-weight: lighter;
+            }
+        }
     }
 
 }
