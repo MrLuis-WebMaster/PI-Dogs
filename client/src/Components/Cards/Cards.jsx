@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect} from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardDog from "../CardDog/CardDog"
 import Spinner from "../Spinner/Spinner";
@@ -7,7 +8,7 @@ import Spinner from "../Spinner/Spinner";
 import "./Cards.scss"
 
 export default function Cards ({dogsFilter}) {
-
+    const NotFound = useSelector(state => state.NotFound);
     const [dogs, setDogs] = useState([])
     
     const [currentPage,setCurrentPage] = useState(0)
@@ -38,6 +39,8 @@ export default function Cards ({dogsFilter}) {
         setDogs([...dogsFilter].splice(firstIndex,8));
     }
 
+    console.log(NotFound);
+
     return (
         <div className="flexFather">
             { dogsFilter.length > 0 ? 
@@ -60,7 +63,7 @@ export default function Cards ({dogsFilter}) {
                     }
                 </div>
                 )
-                : (<Spinner/>) 
+                : NotFound ? (<h1>Dog not found</h1>) : (<Spinner/>)
             }
             <div className="pagination">
                 <button onClick={() => HandleBack()} > Back </button>

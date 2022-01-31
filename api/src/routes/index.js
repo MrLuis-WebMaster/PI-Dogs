@@ -38,7 +38,7 @@ const getAllDogs = async () => {
     const apiInfo = await getApiInfo();
     const dbInfo = await getDbInfo();
     const dbInfoaux = await dbInfo.map( dog => {
-        let aux = dog.temperaments.map( e => e.name).toString()
+        let aux =(dog.temperaments.map( e => e.name)).join(", ")
         return {
             id: dog.id,
             name: dog.name,
@@ -58,11 +58,26 @@ router.get("/dogs", async (req, res, next) => {
         const name = req.query.name;
         const AllDogs = await getAllDogs();
         if(name) {
-            let dogName = AllDogs.find( Element => Element.name.toLowerCase() === name.toLowerCase())
+            let dogName = AllDogs.filter( Element => Element.name.toLowerCase() === name.toLowerCase())
             dogName ? res.status(200).send(dogName) 
                     : res.status(404).send({information:"There is no information related to the parameter"})
         } else {
             res.status(200).send(AllDogs)
+        }
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get("/dogs/search/:name", async (req,res,next)=> {
+    try {
+        const {name} = req.params;
+        const AllDogs = await getAllDogs();
+        const auxDogs =  AllDogs.filter(e => e.name.toLowerCase().includes(name.toLowerCase()))
+        if(auxDogs.length > 0) {
+            res.status(200).send(auxDogs);
+        } else {
+            res.status(404).send({information:"There is no information related to the parameter"})
         }
     } catch (error) {
         next(error)

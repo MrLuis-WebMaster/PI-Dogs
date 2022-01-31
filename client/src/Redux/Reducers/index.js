@@ -83,7 +83,6 @@ export default function rootReducer( state = initialState, action) {
                 if( a.name > b.name ) return 1
                 return 0;
             });
-            console.log(auxDogs)
         }
         if(action.payload === "Z-A") {
             auxDogs.sort((a, b) => {                        
@@ -91,26 +90,16 @@ export default function rootReducer( state = initialState, action) {
                 if( a.name < b.name ) return 1
                 return 0;
             });
-            console.log(auxDogs)
         }
-
         return {
             ...state,
             Dogs:auxDogs
         }
     }
-
     if(action.type === SEARCH_BY_NAME) {
-        let auxDogs = []
-
-        if (action.payload) {
-            auxDogs = state.Dogs.filter(e => e.name.toLowerCase().includes(action.payload.toLowerCase()))
-        } else if(!action.payload) {
-            auxDogs = [...state.Dogs]
-        }
         return {
             ...state,
-            Dogs:auxDogs
+            Dogs: [...action.payload]
         }
     }
     if(action.type === POST_DOG) {

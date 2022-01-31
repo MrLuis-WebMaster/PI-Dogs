@@ -1,6 +1,7 @@
 .BoxSearch{
     display:flex;
     place-content: center;
+    
 }
 
 .flexS {
@@ -17,18 +18,43 @@
 
     .search-name {
         display: flex;
-        flex-direction: column;
-        gap: 1.2rem;
-        span {
-            font-size: 1.2rem;
-            font-weight: bold;
+        gap: 1rem;
+        align-items: flex-end;
+        div {
+            display: flex;
+            gap: 1.2rem;
+            flex-direction: column;
+            span {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+            input {
+                border: none;
+                padding: 1rem 3.5rem;
+                border-radius: 1rem;
+                background-color: #F5F5F5;
+            }
         }
-        input {
+        .send-button {
+            background-color: #1A5F7A;
+            color: #F5F5F5;
             border: none;
-            padding: 1rem 3.5rem;
             border-radius: 1rem;
-            background-color: #F5F5F5;
+            font-weight: bold;
+            padding: .5rem;
+            width: 50%;
+
+            &:hover{
+                transition: ease-in-out .4s all;
+                color: #0a0a0a;
+                background-color: lighten($color: #1A5F7A, $amount: 9);
+            }
         }
+
+
+ 
+
+
     }
 
     .filter-temperament{

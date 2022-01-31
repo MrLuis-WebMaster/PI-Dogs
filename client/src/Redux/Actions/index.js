@@ -12,7 +12,7 @@ export const ORDER_BY_ALPHABET= "ORDER_BY_ALPHABET"
 
 export function getBreeds(){
     return async function(dispatch){
-        const Dogs = await axios.get("http://localhost:3001/dogs");
+        const Dogs = await axios.get(`http://localhost:3001/dogs`);
         return dispatch ({
             type:GET_BREEDS,
             payload: Dogs.data
@@ -61,11 +61,14 @@ export function OrderByAlphabet(data){
     }
 }
 
-export function SearchByName(data) {
-    return {
-        type:SEARCH_BY_NAME,
-        payload:data
-    }
+export function SearchByName(name) {
+    return async function(dispatch){
+        const Dogs = await axios.get(`http://localhost:3001/dogs/search/${name}`);
+        return dispatch ({
+            type:SEARCH_BY_NAME,
+            payload: Dogs.data
+        });
+    };
 }
 
 export function postDog (payload) {   

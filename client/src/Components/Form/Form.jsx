@@ -230,7 +230,7 @@ export default function Form () {
                         </select>
                     </div>
                     <div>
-                        <input type="submit" value="Enviar"/>
+                        <input type="submit" value="Send"/>
                     </div>
                 </form>
                 <div>
@@ -245,7 +245,7 @@ export default function Form () {
                                             <li>{e}</li>
                                             <button name={`${e}`} onClick={(e)=>{filterTemp(e)}}>X</button>
                                         </div>
-                                        <div class="linea"></div>
+                                        <div className="linea"></div>
                                     </div>
                                 )
                             })

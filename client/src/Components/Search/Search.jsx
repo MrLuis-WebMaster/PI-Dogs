@@ -23,18 +23,19 @@ export default function Search ({handleOption}) {
 
     function handleInput(e) {
         setInput(e.target.value)
-        if (e.target.value) {
-            dispatch(SearchByName(e.target.value))
-        } 
+        console.log(input)
         if(!e.target.value) {
             dispatch(getBreeds())
-        } 
+        } else if (e.target.value) {
+            dispatch(SearchByName(e.target.value))
+        }
     }
 
     return (
         <div className="BoxSearch">
             <div className="flexS">
-                <div className="search-name">
+                <form  className="search-name">
+                    <div>
                     <span>Search by name</span>
                     <input 
                         placeholder="Type for search..."
@@ -42,7 +43,8 @@ export default function Search ({handleOption}) {
                         value={input}
                         onChange={(e)=>{handleInput(e)}}
                     />
-                </div>
+                    </div>
+                </form>
                 <div className="filter-temperament">
                     <span>Filter by temperament</span>
                     <select onChange={(e)=> handleOption(e)}>
