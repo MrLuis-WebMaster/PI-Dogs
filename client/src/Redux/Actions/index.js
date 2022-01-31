@@ -63,11 +63,15 @@ export function OrderByAlphabet(data){
 
 export function SearchByName(name) {
     return async function(dispatch){
-        const Dogs = await axios.get(`http://localhost:3001/dogs/search/${name}`);
-        return dispatch ({
-            type:SEARCH_BY_NAME,
-            payload: Dogs.data
-        });
+        try {
+            const Dogs = await axios.get(`http://localhost:3001/dogs/search/${name}`);
+            return dispatch ({
+                type:SEARCH_BY_NAME,
+                payload: Dogs.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
     };
 }
 

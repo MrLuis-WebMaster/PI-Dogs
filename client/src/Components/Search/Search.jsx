@@ -23,7 +23,6 @@ export default function Search ({handleOption}) {
 
     function handleInput(e) {
         setInput(e.target.value)
-        console.log(input)
         if(!e.target.value) {
             dispatch(getBreeds())
         } else if (e.target.value) {

@@ -103,6 +103,7 @@ router.get("/temperament", async (req, res,next) => {
     try {
         const AllDogs = await getAllDogs();
         let temperaments = AllDogs.map((e => e.temperaments))
+        temperaments = temperaments.filter(e => e !== undefined)
         temperaments = temperaments.join().split(",");
         temperaments = [...new Set (temperaments)].sort();  
         temperaments.map( e => {

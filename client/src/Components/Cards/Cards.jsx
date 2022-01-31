@@ -20,16 +20,14 @@ export default function Cards ({dogsFilter}) {
         setTotalPages(Math.floor(dogsFilter.length/8))
     },[dogsFilter])
 
-
     function HandleForwad () {
         const totalElementos = dogsFilter.length;
         const nextPage = currentPage + 1;
         const firstIndex = nextPage * 8;
-        if(firstIndex > totalElementos) return;
+        if(firstIndex >= totalElementos) return;
         setCurrentPage(nextPage)
         setDogs([...dogsFilter].splice(firstIndex,8));
     }
-
 
     function HandleBack () {
         const prevPage = currentPage - 1;
@@ -38,9 +36,6 @@ export default function Cards ({dogsFilter}) {
         setCurrentPage(prevPage)
         setDogs([...dogsFilter].splice(firstIndex,8));
     }
-
-    console.log(NotFound);
-
     return (
         <div className="flexFather">
             { dogsFilter.length > 0 ? 
