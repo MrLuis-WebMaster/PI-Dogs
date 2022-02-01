@@ -70,7 +70,7 @@ export function SearchByName(name) {
                 payload: Dogs.data
             })
         } catch (error) {
-            console.log(error)
+            return alert(`sorry we couldn't locate your puppy  ${name} :(`)
         }
     };
 }

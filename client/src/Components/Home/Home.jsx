@@ -25,7 +25,6 @@ export default function Home () {
 
     function handleOption (e) {
         dispatch(filterDogs(e.target.value))
-        console.log(e.target.value)
     }
 
     return (

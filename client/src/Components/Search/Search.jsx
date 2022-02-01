@@ -9,31 +9,31 @@ export default function Search ({handleOption}) {
     useEffect(()=>{
         dispatch(getTemperaments())
     },[dispatch])
-
     function handleWeight(e) {
-        console.log(e.target.value)
         dispatch(OrderByWeihgt(e.target.value))
     }
-
     function handleAlphabet(e) {
         dispatch(OrderByAlphabet(e.target.value))
     }
-
     const [input,setInput] = useState("")
-
     function handleInput(e) {
         setInput(e.target.value)
         if(!e.target.value) {
             dispatch(getBreeds())
-        } else if (e.target.value) {
-            dispatch(SearchByName(e.target.value))
         }
     }
-
+    function handleClick(e) {
+        e.preventDefault();
+        if(!input) {
+            return alert("Insert a search please")
+        }
+        dispatch(SearchByName(input))
+    }
+    
     return (
         <div className="BoxSearch">
             <div className="flexS">
-                <form  className="search-name">
+                <form onSubmit={e => {handleClick(e)}} className="search-name">
                     <div>
                     <span>Search by name</span>
                     <input 
@@ -43,6 +43,7 @@ export default function Search ({handleOption}) {
                         onChange={(e)=>{handleInput(e)}}
                     />
                     </div>
+                    <input type="submit" value="Find"/>
                 </form>
                 <div className="filter-temperament">
                     <span>Filter by temperament</span>

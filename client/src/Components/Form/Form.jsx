@@ -50,7 +50,7 @@ export default function Form () {
         }
         return errors;
     };
-    const [temp, setTemp] = useState([])
+
     const [state, setState] = useState({
         name: '',
         minHeight: '',
@@ -62,7 +62,6 @@ export default function Form () {
         temperament: []
     })
     const [errors, setErrors] = useState({}); 
-    
     function handleChange(e) {
         setState({
             ...state,
@@ -74,15 +73,19 @@ export default function Form () {
             [e.target.name] : e.target.value
         }));
     }
-
     function handleSelect(e) {
-        setTemp(previous => [...previous,e.target.value]);
-        setState({...state, temperament: temp})
+        if (!state.temperament.includes(e.target.value)) {
+            setState({
+                ...state,
+                temperament: [...state.temperament, e.target.value]
+            });
+        }
     }
-
     function filterTemp(e) {
-        let aux = temp.filter(temperament => temperament !== e.target.name)
-        setTemp(aux)
+        setState({
+            ...state,
+            temperament: state.temperament.filter(el => el !== e.target.name)
+        });
     }
     function handleSubmit(e) {
         if (    errors.name !== undefined 
@@ -237,7 +240,7 @@ export default function Form () {
                     <h3>Temperaments</h3>
                     <div>
                         {
-                            temp.map( (e,i) => {
+                            state.temperament.map( (e,i) => {
                                 return (
                                     
                                     <div key={i}>

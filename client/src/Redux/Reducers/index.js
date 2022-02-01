@@ -13,8 +13,8 @@ const initialState = {
     Dogs: [],
     DetailsDog: [],
     Temperaments: [],
-    FilterDogs:[],
-    NotFound: false
+    FilterDogs:[]
+
 }
 
 export default function rootReducer( state = initialState, action) {
@@ -42,10 +42,12 @@ export default function rootReducer( state = initialState, action) {
 
         if (action.payload) {
             auxDogs = state.Dogs.filter(e => {
-                if (e.temperaments !== undefined) {
+                if (e.temperaments === undefined) {
+                    return e.temperaments;
+                } else {
                     return e.temperaments.includes(action.payload);
                 }
-                return e 
+                
             } )
         } else {
             auxDogs=[...state.Dogs]
@@ -58,7 +60,7 @@ export default function rootReducer( state = initialState, action) {
     }
 
     if(action.type === ORDER_BY_WEIGHT) {
-        let auxDogs = [...state.Dogs]
+        let auxDogs = [...state.FilterDogs]
         if(action.payload === "-/+") {
             auxDogs.sort((a, b) => {                        
                 return parseInt(a.weight) - parseInt(b.weight);
@@ -71,12 +73,12 @@ export default function rootReducer( state = initialState, action) {
         }                     
         return {
             ...state,
-            Dogs:auxDogs
+            FilterDogs:auxDogs
         }
     }
 
     if(action.type === ORDER_BY_ALPHABET) {
-        let auxDogs = [...state.Dogs]
+        let auxDogs = [...state.FilterDogs]
         if(action.payload === "A-Z") {
             auxDogs.sort((a, b) => {                        
                 if( a.name < b.name ) return -1
@@ -93,10 +95,11 @@ export default function rootReducer( state = initialState, action) {
         }
         return {
             ...state,
-            Dogs:auxDogs
+            FilterDogs:auxDogs
         }
     }
     if(action.type === SEARCH_BY_NAME) {
+
         return {
             ...state,
             Dogs: [...action.payload]

@@ -1,14 +1,12 @@
 import React from "react";
 import { useState, useEffect} from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardDog from "../CardDog/CardDog"
 import Spinner from "../Spinner/Spinner";
-
 import "./Cards.scss"
 
 export default function Cards ({dogsFilter}) {
-    const NotFound = useSelector(state => state.NotFound);
+
     const [dogs, setDogs] = useState([])
     
     const [currentPage,setCurrentPage] = useState(0)
@@ -17,6 +15,7 @@ export default function Cards ({dogsFilter}) {
 
     useEffect(()=>{
         setDogs([...dogsFilter].splice(0,8))
+        setCurrentPage(0)
         setTotalPages(Math.floor(dogsFilter.length/8))
     },[dogsFilter])
 
@@ -24,9 +23,10 @@ export default function Cards ({dogsFilter}) {
         const totalElementos = dogsFilter.length;
         const nextPage = currentPage + 1;
         const firstIndex = nextPage * 8;
-        if(firstIndex >= totalElementos) return;
+        if(firstIndex > totalElementos) return;
         setCurrentPage(nextPage)
         setDogs([...dogsFilter].splice(firstIndex,8));
+
     }
 
     function HandleBack () {
@@ -58,11 +58,11 @@ export default function Cards ({dogsFilter}) {
                     }
                 </div>
                 )
-                : NotFound ? (<h1>Dog not found</h1>) : (<Spinner/>)
+                : (<Spinner/>)
             }
             <div className="pagination">
                 <button onClick={() => HandleBack()} > Back </button>
-                <span>{`${currentPage} de ${pagesTotal}`}</span>
+                <span>{`${currentPage + 1} of ${pagesTotal + 1}`}</span>
                 <button onClick={() =>  HandleForwad()}> Forwad </button>
             </div>
         </div>

@@ -59,10 +59,10 @@ router.get("/dogs", async (req, res, next) => {
         const AllDogs = await getAllDogs();
         if(name) {
             let dogName = AllDogs.filter( Element => Element.name.toLowerCase() === name.toLowerCase())
-            dogName ? res.status(200).send(dogName) 
-                    : res.status(404).send({information:"There is no information related to the parameter"})
+            dogName ? res.status(200).json(dogName) 
+                    : res.status(404).json({information:"There is no information related to the parameter"})
         } else {
-            res.status(200).send(AllDogs)
+            res.status(200).json(AllDogs)
         }
     } catch (error) {
         next(error)
@@ -75,9 +75,9 @@ router.get("/dogs/search/:name", async (req,res,next)=> {
         const AllDogs = await getAllDogs();
         const auxDogs =  AllDogs.filter(e => e.name.toLowerCase().includes(name.toLowerCase()))
         if(auxDogs.length > 0) {
-            res.status(200).send(auxDogs);
+            res.status(200).json(auxDogs);
         } else {
-            res.status(404).send({information:"There is no information related to the parameter"})
+            res.status(404).json({information:"There is no information related to the parameter"})
         }
     } catch (error) {
         next(error)
@@ -90,9 +90,9 @@ router.get("/dogs/:id", async (req, res, next) => {
         const AllDogs = await getAllDogs();
         let Dog = AllDogs.find(e => e.id.toString() === id)
         if(Dog) {
-            res.status(200).send(Dog)
+            res.status(200).json(Dog)
         } else {
-            res.status(404).send({information:"There is no information related to the parameter"})
+            res.status(404).json({information:"There is no information related to the parameter"})
         }
     } catch (error) {
         next(error)
@@ -116,7 +116,7 @@ router.get("/temperament", async (req, res,next) => {
             )
         })
         let allTemperaments = await Temperament.findAll();
-        res.send(allTemperaments);
+        res.json(allTemperaments);
     } catch (error) {
         next(error)
     }
@@ -138,7 +138,7 @@ router.get("/temperament", async (req, res,next) => {
                 where: { name : temperament}   
             })
             await newDog.addTemperament(temperamentsDB)  
-            res.status(201).send({ info: "Dog created successfully!" })
+            res.status(201).json({ info: "Dog created successfully!" })
         } catch (error) {
             next(error)
         };
