@@ -32,7 +32,7 @@ export function getBreedsDetails(id){
 
 export function getTemperaments() {
     return async function(dispatch){
-        const Temperaments = await axios("http://localhost:3001/temperament")
+        const Temperaments = await axios.get("http://localhost:3001/temperament")
         return dispatch({
             type:GET_TEMPERAMENTS,
             payload: Temperaments.data
@@ -64,7 +64,7 @@ export function OrderByAlphabet(data){
 export function SearchByName(name) {
     return async function(dispatch){
         try {
-            const Dogs = await axios.get(`http://localhost:3001/dogs/search/${name}`);
+            const Dogs = await axios.get(`http://localhost:3001/dogs?name=${name}`);
             return dispatch ({
                 type:SEARCH_BY_NAME,
                 payload: Dogs.data
@@ -77,7 +77,7 @@ export function SearchByName(name) {
 
 export function postDog (payload) {   
     return async function (dispatch) {
-        var json = await axios.post("http://localhost:3001/dog", payload);  
+        var json = await axios.post("http://localhost:3001/dog",payload);  
         return dispatch ({
             type: POST_DOG,
             payload: json.data
