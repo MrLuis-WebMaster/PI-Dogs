@@ -9,6 +9,7 @@ export const POST_DOG = "POST_DOG";
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const ORDER_BY_ALPHABET= "ORDER_BY_ALPHABET"
+export const CLEAN_DETAILS = "CLEAN_DETAILS"
 
 export function getBreeds(){
     return async function(dispatch){
@@ -75,15 +76,21 @@ export function SearchByName(name) {
     };
 }
 
-export function postDog (payload) {   
+export function postDog (newDog) {   
     return async function (dispatch) {
-        var json = await axios.post("http://localhost:3001/dogs",payload);  
+        var json = await axios.post("http://localhost:3001/dogs",newDog);  
         return dispatch ({
             type: POST_DOG,
             payload: json.data
         })
     }
 };
+
+export function CleanDetails(){
+    return {
+        type: CLEAN_DETAILS
+    }
+}
 
 
 

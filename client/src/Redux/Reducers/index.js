@@ -6,7 +6,8 @@ import {
     POST_DOG, 
     ORDER_BY_WEIGHT,
     SEARCH_BY_NAME,
-    ORDER_BY_ALPHABET
+    ORDER_BY_ALPHABET,
+    CLEAN_DETAILS
 } from "../Actions";
 
 const initialState = {
@@ -24,7 +25,14 @@ export default function rootReducer( state = initialState, action) {
             Dogs: action.payload
         }
     }
+    if(action.type === CLEAN_DETAILS) {
+        return {
+            ...state,
+            DetailsDog:[]
+        }
+    }
     if (action.type === GET_BREEDS_DETAILS) {
+
         return {
             ...state,
             DetailsDog: action.payload
