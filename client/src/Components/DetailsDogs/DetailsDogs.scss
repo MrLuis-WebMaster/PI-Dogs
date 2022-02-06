@@ -1,41 +1,28 @@
 .detaills-dogs{
     display: flex;
     flex-direction: column;
-    place-content: center;
-    place-items: center;
     justify-content: space-evenly;
-    background-color: #086E7D;
-    height: 100vh;
+    background-color: #35589A;
 }
 .flexDetails{
     display: flex;
-    place-items: center;
-    place-content: center;
-    justify-content: space-evenly;
-    gap: 2rem;
-    height: 100%;
+    height: 100vh;
     .ImgDetails{
-        height: 30rem;
-        width:30rem;
-        img {
-            width: 90%;
-            height: 90%;
-        }
+        width:50%;
     }
-
     .InfoDetails{
         color: #0a0a0a;
         display: flex;
         flex-direction: column;
-        flex-basis: fit-content;
-        font-size: 2rem;
+        place-content: center;
         height: 100%;
+        width: 50%;
         p {
-            font-size: 1.2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             span {
                 display: block;
-                font-size: 1rem;
+                font-size: 1.4rem;
                 color: #FFC900;
             }
         }
