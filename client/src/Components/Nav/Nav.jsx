@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/happy.png"
 import "./Nav.scss"
+
 export default function Nav () {
     return (
         <div className="flex">
