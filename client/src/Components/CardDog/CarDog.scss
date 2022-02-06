@@ -3,10 +3,11 @@
     grid-template-columns: 1fr; 
     grid-template-rows: repeat(2, 1fr); 
     gap: 15px 15px; 
-    background-color: #FFC900;
+    background-color: #F0A500;
     padding: 1.5rem;
     height: 22rem;
     border-radius: 1rem;
+    border: 3px solid #370665;
     &:hover {
         transition: ease-in-out .4s;
         transform: scale(1,1.05);
