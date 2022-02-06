@@ -1,14 +1,15 @@
 .detaills-dogs{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    background-color: #35589A;
+    align-items: center;
+    background-color: #F14A16;
 }
 .flexDetails{
     display: flex;
     height: 100vh;
     .ImgDetails{
         width:50%;
+        width: 90%;
     }
     .InfoDetails{
         color: #0a0a0a;

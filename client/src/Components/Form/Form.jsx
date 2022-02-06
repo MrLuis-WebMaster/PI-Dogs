@@ -222,6 +222,7 @@ export default function Form () {
                         )}
                     </div>
                     <div>
+                        <label htmlFor="">Select Temperaments</label>
                         <select onChange={(e)=>handleSelect(e)}>
                             {
                                 temperaments.map( e => {

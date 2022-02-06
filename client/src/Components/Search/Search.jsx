@@ -43,7 +43,7 @@ export default function Search ({handleOption}) {
                         onChange={(e)=>{handleInput(e)}}
                     />
                     </div>
-                    <input type="submit" value="Find"/>
+                    <input  type="submit" value="Find"/>
                 </form>
                 <div className="filter-temperament">
                     <span>Filter by temperament</span>
