@@ -21,11 +21,7 @@ const getApiInfo = async () => {
 const getDbInfo = async () => {
     return await Dog.findAll({            
         include: {
-            model: Temperament,                        
-            attributes: ["name"],
-            through: {
-                attributes: [],
-            },
+            model: Temperament                       
         }
     })
 }
@@ -49,5 +45,6 @@ const getAllDogs = async () => {
 }
 
 module.exports = {
+    getApiInfo,
     getAllDogs
 }

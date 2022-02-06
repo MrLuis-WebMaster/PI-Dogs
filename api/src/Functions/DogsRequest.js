@@ -1,5 +1,5 @@
 const { Dog,Temperament } = require("../db.js");
-const { getAllDogs } = require("./GetAllDogs")
+const { getAllDogs,getApiInfo } = require("./GetAllDogs")
 
 const Dogs = async (req, res, next) => {
     const { name } = req.query;
@@ -35,6 +35,34 @@ const DogsId = async (req, res, next) => {
         next(error)
     }
 }
+
+// const DogsId = async (req,res,next) => {
+
+//     // 560a8451-a29c-41d4-a716-544676554400
+//     // 2
+//     try {
+//         const {id} = req.params;
+//         if (!id.includes("-")) {
+//             const DogsApi = await getApiInfo();
+//             const DogId = DogsApi.find(e => e.id.toString() === id)
+//             return res.status(200).json(DogId)
+//         } else {
+//             const DogId = await Dog.findByPk(id, {
+//                 include:[
+//                     {
+//                         model: Temperament,
+//                         attributtes: ["name"],
+//                         through: { attributes: [] }
+//                     }
+//                 ]
+//             })
+//             DogId.temperaments = (DogId.temperaments.map( e => e.name)).join(", ")
+//             return res.status(200).json(DogId);
+//         }
+//     } catch (error) {
+//         next(error)
+//     }
+// }
 
 
 const DogPost = async (req, res, next) => {
